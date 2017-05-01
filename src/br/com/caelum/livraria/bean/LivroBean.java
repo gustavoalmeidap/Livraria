@@ -92,5 +92,12 @@ public class LivroBean {
 			throw new ValidatorException(new FacesMessage("O ISBN deve sempre começar com 1"));
 		}
 	}
+	
+	public void carregaLivroId() {
+		this.livro = new DAO<Livro>(Livro.class).buscaPorId(livro.getId());
+		if (this.livro == null) {
+			this.livro = new Livro();
+		}
+	}
 
 }

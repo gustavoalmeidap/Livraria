@@ -45,4 +45,12 @@ public class AutorBean {
 		System.out.println("Alterando autor");
 		this.autor = autor;
 	}
+	
+	public void carregaAutorId() {
+		System.out.println("Carregando autor pela ID");
+		this.autor = new DAO<Autor>(Autor.class).buscaPorId(this.autor.getId());
+		if (this.autor == null) {
+			this.autor = new Autor();
+		}
+	}
 }
