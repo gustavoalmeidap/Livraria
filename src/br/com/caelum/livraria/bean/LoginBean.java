@@ -1,5 +1,6 @@
 package br.com.caelum.livraria.bean;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
@@ -30,7 +31,17 @@ public class LoginBean {
 			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
 			return "livro?faces-redirect=true";
 		} else {
-			return null;
+			context.addMessage(null, new FacesMessage("Usuário não encontrado ou senha incorreta!"));
+			context.getExternalContext().getFlash().setKeepMessages(true);
+			return "login?faces-redirect=true";
 		}
+	}
+	
+	public String efetuaLogout() {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		context.getExternalContext().getSessionMap().remove("usuarioLogado");
+		
+		return "login?faces-redirect=true";
 	}
 }
