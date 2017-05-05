@@ -8,6 +8,11 @@
         <h:body>
         	<div id="cabecalho">
         		<h:graphicImage library="img" name="logo.png" />
+        		<h:panelGroup rendered="#{not empty usuarioLogado}">
+        			<p>Logado como: 
+        				<h:outputText value="#{sessionScope['usuarioLogado'].email}"/>
+        			</p>
+        		</h:panelGroup>
         		<h1>
         			<ui:insert name="titulo"></ui:insert>
         		</h1>

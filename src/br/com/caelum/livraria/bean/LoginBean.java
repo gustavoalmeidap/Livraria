@@ -2,6 +2,7 @@ package br.com.caelum.livraria.bean;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.caelum.livraria.dao.UsuarioDAO;
 import br.com.caelum.livraria.modelo.Usuario;
@@ -23,7 +24,10 @@ public class LoginBean {
 	public String efetuaLogin() {
 		UsuarioDAO dao = new UsuarioDAO();
 		
-		if (dao.existeUsuario(usuario)) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		
+		if (dao.existeUsuario(this.usuario)) {
+			context.getExternalContext().getSessionMap().put("usuarioLogado", this.usuario);
 			return "livro?faces-redirect=true";
 		} else {
 			return null;
